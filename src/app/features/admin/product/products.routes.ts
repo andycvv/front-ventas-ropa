@@ -13,7 +13,7 @@ export const routes: Routes = [
     component: AddProductComponent
   },
   {
-    path: 'editar',
+    path: 'editar/:id',
     component: EditProductComponent
   }
 ]
