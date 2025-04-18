@@ -4,4 +4,11 @@ export interface Product {
   description: string;
   price: number;
   createdAt?: string;
+  enabled: boolean;
+  category: Category
+}
+
+export interface Category {
+  id?: number;
+  name?: string;
 }
