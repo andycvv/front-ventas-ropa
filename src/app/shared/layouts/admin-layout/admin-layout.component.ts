@@ -1,5 +1,5 @@
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
@@ -27,6 +27,15 @@ export class AdminLayoutComponent {
   user = {
     name: 'Andy Vargas',
     role: 'Admin',
+  }
+
+  ngOnInit() {
+    this.onResize();
+  }
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.collapsed = window.innerWidth < 768;
   }
 
   logout() {
