@@ -8,6 +8,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { FormsModule } from '@angular/forms';
 import { Tag } from 'primeng/tag';
 import { Router } from '@angular/router';
+import { InputText } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-product-list',
@@ -17,7 +18,8 @@ import { Router } from '@angular/router';
     ButtonModule,
     DropdownModule,
     FormsModule,
-    Tag
+    Tag,
+    InputText
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css'
@@ -33,6 +35,8 @@ export class ProductListComponent implements OnInit {
   ];
   selectedStatus: boolean | null = null;
 
+  searchTerm: string = '';
+
   constructor(
     private productService: ProductService,
     private router: Router
@@ -45,13 +49,14 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  filterProductsByStatus() {
-    if (this.selectedStatus === null) {
-      this.filteredProducts = this.products;
-    } else {
-      this.filteredProducts = this.products.filter(product => product.enabled === this.selectedStatus);
-    }
+  filterProducts() {
+    this.filteredProducts = this.products.filter(product => {
+      const matchesStatus = this.selectedStatus === null || product.enabled === this.selectedStatus;
+      const matchesName = this.searchTerm === '' || product.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+      return matchesStatus && matchesName;
+    });
   }
+  
 
   addProduct() {
     this.router.navigate(['/admin/productos/crear']);

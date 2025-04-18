@@ -1,13 +1,17 @@
 <h2 class="text-3xl font-bold mb-3">Listado de Productos</h2>
 
 <div class="flex justify-between mb-4">
-  <p-dropdown
-    [options]="statusOptions"
-    [(ngModel)]="selectedStatus"
-    placeholder="Seleccionar Estado"
-    (onChange)="filterProductsByStatus()"
-    class="w-48"
-  ></p-dropdown>
+  <div>
+    <p-dropdown
+      [options]="statusOptions"
+      [(ngModel)]="selectedStatus"
+      placeholder="Seleccionar Estado"
+      (onChange)="filterProducts()"
+      class="w-48 mr-2"
+    ></p-dropdown>
+    <input pInputText [(ngModel)]="searchTerm" type="text" placeholder="Nombre" (input)="filterProducts()" />
+  </div>
+
   <p-button
     label="Agregar Producto"
     icon="pi pi-plus"
@@ -19,6 +23,7 @@
   <p-table
       [value]="filteredProducts"
       [paginator]="true"
+      [paginatorPosition]="'top'"
       [rows]="5"
       [tableStyle]="{ 'min-width': '50rem' }"
       [rowsPerPageOptions]="[5, 10, 20]"
