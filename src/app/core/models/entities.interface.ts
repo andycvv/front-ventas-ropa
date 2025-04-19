@@ -20,3 +20,9 @@ export interface Color {
   code?: string;
   enabled: boolean;
 }
+
+export interface Size {
+  id?: number;
+  value?: string;
+  enabled: boolean;
+}
