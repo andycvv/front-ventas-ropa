@@ -1,0 +1,67 @@
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { TableModule } from 'primeng/table';
+import { DropdownModule } from 'primeng/dropdown';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { FormsModule } from '@angular/forms';
+import { Tag } from 'primeng/tag';
+
+
+@Component({
+  selector: 'app-table',
+  imports: [
+    CommonModule,
+    TableModule,
+    DropdownModule,
+    InputTextModule,
+    ButtonModule,
+    FormsModule,
+    Tag
+  ],
+  templateUrl: './table.component.html',
+  styleUrl: './table.component.css'
+})
+export class TableComponent {
+  @Input() data: any[] = [];
+  @Input() columns: { field: string, header: string }[] = [];
+  @Input() baseEditRoute: string = '';
+  @Input() showStatusFilter: boolean = true;
+  @Input() showNameFilter: boolean = true;
+
+  @Output() onAdd = new EventEmitter<void>();
+
+  filteredData: any[] = [];
+  selectedStatus: boolean | null = null;
+  searchTerm: string = '';
+
+  ngOnChanges() {
+    this.applyFilters();
+  }
+
+  applyFilters() {
+    this.filteredData = this.data.filter(item => {
+      const matchesStatus = this.selectedStatus === null || item.enabled === this.selectedStatus;
+      const matchesName = this.searchTerm === '' || item.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+      return matchesStatus && matchesName;
+    });
+  }
+
+  editItem(id: number) {
+    window.location.href = `${this.baseEditRoute}/${id}`;
+  }
+
+  addItem() {
+    this.onAdd.emit();
+  }
+
+  statusOptions = [
+    { label: 'Todos', value: null },
+    { label: 'Habilitados', value: true },
+    { label: 'Deshabilitados', value: false }
+  ];
+
+  getNestedValue(obj: any, path: string): any {
+    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+  }
+}
