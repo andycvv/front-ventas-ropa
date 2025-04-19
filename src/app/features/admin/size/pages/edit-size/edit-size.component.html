@@ -1,0 +1,11 @@
+<h2 class="text-3xl font-bold">Editar talla</h2>
+
+@if (size) {
+  <app-size-form
+    [size]="size"
+    [submitLabel]="'Editar talla'"
+    [showStatusToggle]="true"
+    (formSubmit)="createSize($event)"
+    (cancel)="cancel()"
+  ></app-size-form>
+}

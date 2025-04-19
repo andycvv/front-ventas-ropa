@@ -1,0 +1,7 @@
+<h2 class="text-3xl font-bold">Crear talla</h2>
+
+<app-size-form
+  [submitLabel]="'Crear talla'"
+  (formSubmit)="createSize($event)"
+  (cancel)="cancel()"
+></app-size-form>

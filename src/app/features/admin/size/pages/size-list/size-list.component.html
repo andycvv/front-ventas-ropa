@@ -1,0 +1,10 @@
+<h2 class="text-3xl font-bold mb-3">Listado de Tallas</h2>
+
+<app-table
+  [data]="sizes"
+  [columns]="[
+    { field: 'value', header: 'Valor' }
+  ]"
+  [baseEditRoute]="'/admin/tallas/editar'"
+  (onAdd)="addSize()"
+></app-table>
