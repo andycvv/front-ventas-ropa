@@ -13,3 +13,10 @@ export interface Category {
   name?: string;
   enabled: boolean;
 }
+
+export interface Color {
+  id?: number;
+  name?: string;
+  code?: string;
+  enabled: boolean;
+}
