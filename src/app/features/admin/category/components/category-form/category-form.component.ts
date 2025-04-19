@@ -1,0 +1,64 @@
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { InputGroupModule } from 'primeng/inputgroup';
+import { InputGroupAddonModule } from 'primeng/inputgroupaddon';
+import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule } from 'primeng/select';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { TextareaModule } from 'primeng/textarea';
+import { ButtonModule } from 'primeng/button';
+import { Category } from '../../../../../core/models/entities.interface';
+
+@Component({
+  selector: 'app-category-form',
+  imports: [
+    FormsModule,
+    InputGroupModule,
+    InputGroupAddonModule,
+    InputTextModule,
+    SelectModule,
+    InputNumberModule,
+    TextareaModule,
+    ButtonModule,
+  ],
+  templateUrl: './category-form.component.html',
+  styleUrl: './category-form.component.css'
+})
+export class CategoryFormComponent {
+  @Input() category: Partial<Category> = {};
+  @Input() showStatusToggle: boolean = false;
+  @Input() submitLabel: string = 'Guardar';
+  @Input() loading: boolean = false;
+
+  @Output() formSubmit = new EventEmitter<Category>();
+  @Output() cancel = new EventEmitter<void>();
+
+  name: string = '';
+  selectedStatus: { label: string; value: boolean } | null = null;
+
+  states = [
+    { label: 'Habilitado', value: true },
+    { label: 'Deshabilitado', value: false },
+  ];
+
+  ngOnInit(): void {
+    this.name = this.category.name || '';
+    this.selectedStatus = this.category.enabled != null
+      ? (this.category.enabled ? this.states[0] : this.states[1])
+      : this.states[0];
+  }
+
+  submit() {
+    const newCategory: Category = {
+      ...this.category,
+      name: this.name,
+      enabled: this.selectedStatus?.value ?? true,
+    };
+
+    this.formSubmit.emit(newCategory);
+  }
+
+  onCancel() {
+    this.cancel.emit();
+  }
+}
