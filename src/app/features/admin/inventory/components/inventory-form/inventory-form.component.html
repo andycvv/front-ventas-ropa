@@ -1,0 +1,85 @@
+<div class="card grid grid-cols-1 md:grid-cols-1 gap-4">
+
+  <!-- Stock -->
+  <!-- <p-inputNumber [(ngModel)]="stock" placeholder="Stock" inputId="stock" [min]="0" class="w-full" /> -->
+  <p-iftalabel>
+    <input pInputText id="stock" [(ngModel)]="stock" autocomplete="off" class="w-full" />
+    <label for="stock">Stock</label>
+  </p-iftalabel>
+
+
+  <!-- Enable -->
+  @if (showStatusToggle) {
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-circle-on"></i>
+      </p-inputgroup-addon>
+      <p-select [(ngModel)]="selectedStatus" [options]="states" optionLabel="label" placeholder="Estado" />
+    </p-inputgroup>
+  }
+
+  <!-- Product select -->
+  <p-dropdown
+    [options]="products"
+    [(ngModel)]="selectedProduct"
+    optionLabel="name"
+    placeholder="Seleccionar producto"
+    class="w-full"
+  ></p-dropdown>
+
+  <!-- Size select -->
+  <p-dropdown
+    [options]="sizes"
+    [(ngModel)]="selectedSize"
+    optionLabel="value"
+    placeholder="Seleccionar talla"
+    class="w-full"
+  ></p-dropdown>
+
+  <!-- Color select -->
+  <p-dropdown
+    [options]="colors"
+    [(ngModel)]="selectedColor"
+    optionLabel="name"
+    placeholder="Seleccionar color"
+    class="w-full"
+  ></p-dropdown>
+</div>
+
+<!-- Imagenes -->
+<div class="card mt-4">
+  <label for="imageUrl">Agregar imagen (URL):</label>
+  <div class="flex gap-2 my-2">
+    <input
+      pInputText
+      [(ngModel)]="imageUrl"
+      placeholder="https://example.com/imagen.jpg"
+      class="w-full"
+    />
+    <p-button icon="pi pi-plus" (click)="addImage()" label="Agregar"></p-button>
+  </div>
+
+  <!-- Vista previa -->
+  <div class="flex flex-wrap gap-4">
+    <div *ngFor="let img of imageProducts; let i = index" class="relative">
+      <p-image [src]="img.url" alt="Image" width="250" [preview]="true" />
+      <button
+        (click)="removeImage(i)"
+        class="absolute top-1 right-1 bg-red-600 text-white rounded-full px-2 py-1 text-xs cursor-pointer"
+      >
+        X
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Botones -->
+<div class="flex justify-start gap-2 mt-5">
+  <p-button
+    [label]="submitLabel"
+    icon="pi pi-check"
+    (click)="submit()"
+    [loading]="loading"
+  ></p-button>
+  <p-button label="Cancelar" icon="pi pi-times" severity="secondary" (click)="cancel.emit()"></p-button>
+</div>
