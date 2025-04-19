@@ -19,7 +19,7 @@ export class AdminLayoutComponent {
     { icon: 'pi pi-tag', name: 'Categorías', path: 'categorias' },
     { icon: 'pi pi-palette', name: 'Colores', path: 'colores' },
     { icon: 'pi pi-file', name: 'Tallas', path: 'tallas' },
-    { icon: 'pi pi-map', name: 'Inventario', path: 'inventarios' },
+    { icon: 'pi pi-map', name: 'Inventarios', path: 'inventarios' },
     { icon: 'pi pi-gift', name: 'Pedidos', path: 'pedidos' },
     { icon: 'pi pi-users', name: 'Usuarios', path: 'usuarios' },
   ];
