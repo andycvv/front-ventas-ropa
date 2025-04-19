@@ -19,4 +19,8 @@ export class CategoryService {
   save(category: Category) {
     return this.http.post<Category>(this.apiUrl, category);
   }
+
+  getById(id: number) {
+    return this.http.get<Category>(`${this.apiUrl}/${id}`);
+  }
 }
