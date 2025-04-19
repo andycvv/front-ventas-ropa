@@ -1,0 +1,32 @@
+<div class="card grid grid-cols-1 md:grid-cols-1 gap-4 my-5">
+  <p-inputgroup>
+    <p-inputgroup-addon>
+      <i class="pi pi-box"></i>
+    </p-inputgroup-addon>
+    <input pInputText [(ngModel)]="value" placeholder="Valor" />
+  </p-inputgroup>
+
+  @if (showStatusToggle) {
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-circle-on"></i>
+      </p-inputgroup-addon>
+      <p-select [(ngModel)]="selectedStatus" [options]="states" optionLabel="label" placeholder="Estado" />
+    </p-inputgroup>
+  }
+</div>
+
+<p-button
+  [label]="submitLabel"
+  icon="pi pi-check"
+  (click)="submit()"
+  class="w-full"
+  [loading]="loading"
+></p-button>
+<p-button
+  label="Cancelar"
+  icon="pi pi-times"
+  severity="secondary"
+  (click)="onCancel()"
+  class="w-full ml-2"
+></p-button>
