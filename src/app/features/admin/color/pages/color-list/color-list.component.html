@@ -1,0 +1,11 @@
+<h2 class="text-3xl font-bold mb-3">Listado de Colores</h2>
+
+<app-table
+  [data]="colors"
+  [columns]="[
+    { field: 'name', header: 'Nombre' },
+    { field: 'code', header: 'Código de color' },
+  ]"
+  [baseEditRoute]="'/admin/colores/editar'"
+  (onAdd)="addColor()"
+></app-table>

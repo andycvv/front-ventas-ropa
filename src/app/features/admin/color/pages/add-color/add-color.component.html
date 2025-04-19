@@ -1,0 +1,7 @@
+<h2 class="text-3xl font-bold">Crear color</h2>
+
+<app-color-form
+  [submitLabel]="'Crear color'"
+  (formSubmit)="createColor($event)"
+  (cancel)="cancel()"
+></app-color-form>

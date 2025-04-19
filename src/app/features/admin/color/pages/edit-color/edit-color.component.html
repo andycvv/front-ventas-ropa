@@ -1,0 +1,11 @@
+<h2 class="text-3xl font-bold">Editar color</h2>
+
+@if (color) {
+  <app-color-form
+    [color]="color"
+    [submitLabel]="'Actualizar'"
+    [showStatusToggle]="true"
+    (cancel)="cancel()"
+    (formSubmit)="editColor($event)"
+  ></app-color-form>
+}
