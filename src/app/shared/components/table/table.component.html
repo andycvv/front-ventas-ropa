@@ -53,8 +53,16 @@
               [style]="{ width: '100%', display: 'inline' }"
               [disabled]="true"
             ></p-colorPicker>
-          } 
-          {{ getNestedValue(item, col.field) }}
+          }
+
+          @if (col.field === 'color.name') {
+            <p-colorPicker 
+              [(ngModel)]="item.color.code" 
+              [style]="{ width: '100%', display: 'inline' }"
+              [disabled]="true"
+            ></p-colorPicker>
+          }
+          {{ getNestedValue(item, col.field).length > 20 ? getNestedValue(item, col.field).substring(0, 20) + '...' : getNestedValue(item, col.field) }}
         </td>
       }
       <td>
