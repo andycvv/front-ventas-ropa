@@ -1,0 +1,14 @@
+<h2 class="text-3xl font-bold mb-3">Listado de inventarios</h2>
+
+<app-table
+  [data]="inventories"
+  [columns]="[
+    { field: 'product.name', header: 'Producto' },
+    { field: 'product.category.name', header: 'Categoría' },
+    { field: 'stock', header: 'Stock' },
+    { field: 'size.value', header: 'Talla' },
+    { field: 'color.name', header: 'Color' },
+  ]"
+  [baseEditRoute]="'/admin/inventarios/editar'"
+  (onAdd)="addInventory()"
+></app-table>

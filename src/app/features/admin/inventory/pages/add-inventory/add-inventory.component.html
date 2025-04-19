@@ -1,0 +1,9 @@
+<h2 class="text-3xl font-bold mb-5">Crear inventario</h2>
+
+<app-inventory-form
+  [products]="products"
+  [sizes]="sizes"
+  [colors]="colors"
+  (cancel)="cancel()"
+  (formSubmit)="addInventory($event)"
+></app-inventory-form>

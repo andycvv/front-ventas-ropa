@@ -1,0 +1,13 @@
+<h2 class="text-3xl font-bold mb-5">Editar inventario</h2>
+
+@if(inventory) {
+  <app-inventory-form
+    [inventory]="inventory"
+    [products]="products"
+    [sizes]="sizes"
+    [colors]="colors"
+    [showStatusToggle]="true"
+    (cancel)="cancel()"
+    (formSubmit)="editInventory($event)"
+  ></app-inventory-form>
+}
