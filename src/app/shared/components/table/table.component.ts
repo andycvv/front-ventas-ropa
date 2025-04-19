@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
 import { Tag } from 'primeng/tag';
+import { ColorPicker } from 'primeng/colorpicker';
 
 
 @Component({
@@ -17,7 +18,8 @@ import { Tag } from 'primeng/tag';
     InputTextModule,
     ButtonModule,
     FormsModule,
-    Tag
+    Tag,
+    ColorPicker
   ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css'

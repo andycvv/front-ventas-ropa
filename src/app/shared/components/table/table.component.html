@@ -35,7 +35,9 @@
 >
   <ng-template #header>
     <tr>
-      <th *ngFor="let col of columns">{{ col.header }}</th>
+      @for (col of columns; track $index) {
+        <th>{{ col.header }}</th>
+      }
       <th>Estado</th>
       <th>Acciones</th>
     </tr>
@@ -43,9 +45,18 @@
 
   <ng-template #body let-item>
     <tr>
-      <td *ngFor="let col of columns">
-        {{ getNestedValue(item, col.field) }}
-      </td>
+      @for (col of columns; track $index) {
+        <td>
+          @if (col.field === 'code') {
+            <p-colorPicker 
+              [(ngModel)]="item[col.field]" 
+              [style]="{ width: '100%', display: 'inline' }"
+              [disabled]="true"
+            ></p-colorPicker>
+          } 
+          {{ getNestedValue(item, col.field) }}
+        </td>
+      }
       <td>
         @if (item.enabled) {
           <p-tag value="Habilitado" severity="success" icon="pi pi-check" />
