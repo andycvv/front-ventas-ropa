@@ -12,5 +12,9 @@ export const routes: Routes = [
   {
     path: 'colores',
     loadChildren: () => import('./color/colors.routes').then(m => m.routes)
+  },
+  {
+    path: 'tallas',
+    loadChildren: () => import('./size/sizes.routes').then(m => m.routes)
   }
 ]
