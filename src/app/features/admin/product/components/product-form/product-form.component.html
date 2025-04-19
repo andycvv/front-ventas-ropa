@@ -1,0 +1,54 @@
+<div class="card grid grid-cols-1 md:grid-cols-1 gap-4 my-5">
+  <p-inputgroup>
+    <p-inputgroup-addon>
+      <i class="pi pi-box"></i>
+    </p-inputgroup-addon>
+    <input pInputText [(ngModel)]="name" placeholder="Nombre" />
+  </p-inputgroup>
+
+  <p-inputgroup>
+    <p-inputgroup-addon>$</p-inputgroup-addon>
+    <p-inputnumber [(ngModel)]="price" placeholder="Precio" />
+    <p-inputgroup-addon>.00</p-inputgroup-addon>
+  </p-inputgroup>
+
+  <p-inputgroup>
+    <p-inputgroup-addon>
+      <i class="pi pi-cog"></i>
+    </p-inputgroup-addon>
+    <p-select [(ngModel)]="selectedCategory" [options]="categories" optionLabel="name" placeholder="Categoría" />
+  </p-inputgroup>
+
+  @if (showStatusToggle) {
+    <p-inputgroup>
+      <p-inputgroup-addon>
+        <i class="pi pi-circle-on"></i>
+      </p-inputgroup-addon>
+      <p-select [(ngModel)]="selectedStatus" [options]="states" optionLabel="label" placeholder="Estado" />
+    </p-inputgroup>
+  }
+
+  <textarea
+    pTextarea
+    [(ngModel)]="description"
+    pSize="large"
+    placeholder="Descripción"
+    style="resize: none"
+    rows="3"
+  ></textarea>
+</div>
+
+<p-button
+  [label]="submitLabel"
+  icon="pi pi-check"
+  (click)="submit()"
+  class="w-full"
+  [loading]="loading"
+></p-button>
+<p-button
+  label="Cancelar"
+  icon="pi pi-times"
+  severity="secondary"
+  (click)="onCancel()"
+  class="w-full ml-2"
+></p-button>

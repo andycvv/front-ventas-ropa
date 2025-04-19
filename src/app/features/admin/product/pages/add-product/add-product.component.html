@@ -1,28 +1,8 @@
 <h2 class="text-3xl font-bold">Crear producto</h2>
 
-<div class="card grid grid-cols-1 md:grid-cols-1 gap-4 my-5">
-  <p-inputgroup>
-    <p-inputgroup-addon>
-      <i class="pi pi-box"></i>
-    </p-inputgroup-addon>
-    <input pInputText [(ngModel)]="name" placeholder="Nombre" />
-  </p-inputgroup>
-
-  <p-inputgroup>
-    <p-inputgroup-addon>$</p-inputgroup-addon>
-    <p-inputnumber [(ngModel)]="price" placeholder="Precio" />
-    <p-inputgroup-addon>.00</p-inputgroup-addon>
-  </p-inputgroup>
-
-  <p-inputgroup>
-    <p-inputgroup-addon>
-      <i class="pi pi-cog"></i>
-    </p-inputgroup-addon>
-    <p-select [(ngModel)]="selectedCategory" [options]="categories" optionLabel="name" placeholder="Categoria" />
-  </p-inputgroup>
-
-  <textarea pTextarea [(ngModel)]="description" pSize="large" placeholder="Descripcion" style="resize: none;" rows="3"></textarea>
-</div>
-
-<p-button label="Crear producto" icon="pi pi-check" (click)="createProduct()"></p-button>
-<p-button label="Cancelar" icon="pi pi-times" severity="secondary" (click)="cancel()" class="ml-2"></p-button>
+<app-product-form
+  [categories]="categories"
+  [submitLabel]="'Crear producto'"
+  (formSubmit)="createProduct($event)"
+  (cancel)="cancel()"
+></app-product-form>

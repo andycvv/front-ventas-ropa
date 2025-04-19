@@ -11,6 +11,7 @@ import { ButtonModule } from 'primeng/button';
 import { CategoryService } from '../../../../../core/services/category.service';
 import { ProductService } from '../../../../../core/services/product.service';
 import { Router } from '@angular/router';
+import { ProductFormComponent } from '../../components/product-form/product-form.component';
 
 @Component({
   selector: 'app-add-product',
@@ -22,24 +23,15 @@ import { Router } from '@angular/router';
     SelectModule, 
     InputNumberModule,
     TextareaModule,
-    ButtonModule
+    ButtonModule,
+    ProductFormComponent
   ],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css'
 })
 export class AddProductComponent implements OnInit {
-  name: string = '';
 
-  price: string = '0.00';
-
-  selectedCategory: Category | null = null;
-
-  description: string = '';
-
-  categories: Category[] = [
-    {id: 1, name: 'Category 1'},
-    {id: 2, name: 'Category 2'},
-  ];
+  categories: Category[] = [];
 
   constructor(
     private categoryService: CategoryService,
@@ -49,21 +41,14 @@ export class AddProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.categoryService.getAll().subscribe((categories: Category[]) => {
-      this.categories = categories;
-      this.selectedCategory = this.categories[0];
+      this.categories = categories.filter(category => category.enabled);
     });
   }
 
-  createProduct() {
-    const product: Product = {
-      name: this.name,
-      price: parseFloat(this.price || '0'),
-      description: this.description,
-      enabled: true,
-      category: this.selectedCategory || { id: 0, name: '' },
-    };
-
-    this.productService.save(product).subscribe(() => this.router.navigate(['/admin/productos']));
+  createProduct(product: Product) {
+    this.productService.save(product).subscribe(() => {
+      this.router.navigate(['/admin/productos']);
+    });
   }
 
   cancel() {
