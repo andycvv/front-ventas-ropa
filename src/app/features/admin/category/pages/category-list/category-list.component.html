@@ -1,0 +1,10 @@
+<h2 class="text-3xl font-bold mb-3">Listado de Categorías</h2>
+
+<app-table
+  [data]="filteredCategories"
+  [columns]="[
+    { field: 'name', header: 'Nombre' }
+  ]"
+  [baseEditRoute]="'/admin/categorias/editar'"
+  (onAdd)="addCategory()"
+></app-table>

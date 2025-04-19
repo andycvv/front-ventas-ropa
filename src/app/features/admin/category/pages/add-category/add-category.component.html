@@ -1,0 +1,7 @@
+<h2 class="text-3xl font-bold">Crear categoría</h2>
+
+<app-category-form
+  [submitLabel]="'Crear categoría'"
+  (formSubmit)="createCategory($event)"
+  (cancel)="cancel()"
+></app-category-form>
