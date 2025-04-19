@@ -44,8 +44,13 @@ export class TableComponent {
   applyFilters() {
     this.filteredData = this.data.filter(item => {
       const matchesStatus = this.selectedStatus === null || item.enabled === this.selectedStatus;
-      const matchesName = this.searchTerm === '' || item.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-      return matchesStatus && matchesName;
+
+      const matches = this.columns.some(column => {
+        const value = this.getNestedValue(item, column.field);
+        return typeof value === 'string' && value.toLowerCase().includes(this.searchTerm.toLowerCase());
+      });
+
+      return matchesStatus && matches;
     });
   }
 
