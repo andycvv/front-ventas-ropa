@@ -62,6 +62,10 @@
               [disabled]="true"
             ></p-colorPicker>
           }
+
+          @if (col.field === 'price') {
+            S/.
+          }
           {{ getNestedValue(item, col.field).length > 20 ? getNestedValue(item, col.field).substring(0, 20) + '...' : getNestedValue(item, col.field) }}
         </td>
       }
