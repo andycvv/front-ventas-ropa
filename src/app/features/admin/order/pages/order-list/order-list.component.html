@@ -1,0 +1,89 @@
+<h2 class="text-3xl font-bold mb-3">Listado de Pedidos</h2>
+
+<div class="flex justify-between mb-4">
+  <div class="flex flex-wrap gap-2">
+    <p-dropdown
+      [options]="states"
+      [(ngModel)]="selectedStatus"
+      placeholder="Estado"
+      (onChange)="applyFilters()"
+      class="w-48"
+    ></p-dropdown>
+
+    <input
+      pInputText
+      [(ngModel)]="searchTerm"
+      placeholder="Usuario"
+      (input)="applyFilters()"
+    />
+
+    <p-datepicker
+      [(ngModel)]="dateRange"
+      selectionMode="range"
+      dateFormat="yy-mm-dd"
+      placeholder="Rango de fechas"
+      (onSelect)="applyFilters()"
+      class="w-60"
+    />
+    
+    <p-button label="Restablecer filtros" icon="pi pi-refresh" (click)="resetFilters()"></p-button>
+
+  </div>
+</div>
+
+<p-table
+  [value]="filteredOrders"
+  [paginator]="true"
+  [paginatorPosition]="'top'"
+  [rows]="5"
+  [rowsPerPageOptions]="[5, 10, 20]"
+  [tableStyle]="{ 'min-width': '50rem' }"
+>
+  <ng-template #header>
+    <tr>
+      <th>ID</th>
+      <th>Usuario</th>
+      <th>Fecha</th>
+      <th>Estado</th>
+      <th>Total</th>
+      <th>Acciones</th>
+    </tr>
+  </ng-template>
+  
+  <ng-template #body let-item>
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.user.username }}</td>
+      <td>{{ item.createdAt | date: 'yyyy-MM-dd' }}</td>
+      <td>
+        @if(item.status === 'PENDIENTE') {
+          <p-tag value="Pendiente" severity="warn" />
+        } @else if (item.status === 'PAGADO') {
+          <p-tag value="Pagado" severity="success" />
+        } @else if (item.status === 'ENVIADO') {
+          <p-tag value="Enviado" severity="danger" />
+        } @else if (item.status === 'ENTREGADO') {
+          <p-tag value="Entregado" severity="info" />
+        }
+      </td>
+      <td>{{ item.totalAmount | currency: 'S/. ' }}</td>
+      <td>
+        <p-button type="button" icon="pi pi-eye" text />
+        <!-- el dropdown de abajo debe de superponerse a todo -->
+        <p-dropdown
+          [options]="[
+            { label: 'Pendiente', value: 'PENDIENTE' },
+            { label: 'Pagado', value: 'PAGADO' },
+            { label: 'Enviado', value: 'ENVIADO' },
+            { label: 'Entregado', value: 'ENTREGADO' }
+          ]"
+          [(ngModel)]="item.status"
+          (onChange)="updateOrderStatus(item, $event.value)"
+          placeholder="Cambiar estado"
+          class="w-48"
+          [appendTo]="'body'"
+        ></p-dropdown>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
