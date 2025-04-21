@@ -41,3 +41,45 @@ export interface Inventory {
   color: Color;
   imageProducts: ImageProduct[]
 }
+
+export interface User {
+  id?: number;
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface Address {
+  id?: number;
+  street: string;
+  city: string;
+  country: string;
+  zipCode: string;
+  user: User;
+}
+
+export interface Payment {
+  id?: number;
+  transactionId: string;
+  createdAt: string;
+  paymentMethod: string;
+  paymentStatus: string;
+}
+
+export interface OrderDetail {
+  id?: number;
+  quantity: number;
+  price: number;
+  inventory: Inventory
+}
+
+export interface Order {
+  id?: number;
+  totalAmount: number;
+  createdAt: string;
+  status: string;
+  user: User;
+  address: Address;
+  payments: Payment[];
+  orderDetails: OrderDetail[];
+}
