@@ -29,9 +29,9 @@ export class EditInventoryComponent {
   ) {}
 
   ngOnInit() {
-    this.productService.getAll().subscribe(products => this.products = products);
-    this.sizeService.getAll().subscribe(sizes => this.sizes = sizes);
-    this.colorService.getAll().subscribe(colors => this.colors = colors);
+    this.productService.getAll().subscribe(products => this.products = products.filter(p => p.enabled));
+    this.sizeService.getAll().subscribe(sizes => this.sizes = sizes.filter(s => s.enabled));
+    this.colorService.getAll().subscribe(colors => this.colors = colors.filter(c => c.enabled));
 
     this.route.params.subscribe(params => {
       const id = params['id'];
