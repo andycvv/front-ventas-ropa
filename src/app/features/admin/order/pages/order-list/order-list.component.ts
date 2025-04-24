@@ -65,11 +65,11 @@ export class OrderListComponent implements OnInit {
         this.selectedStatus === null || item.status === this.selectedStatus.status;
 
       const matchesUsername =
-        !this.searchTerm || item.user.username.toLowerCase().includes(this.searchTerm.toLowerCase());
+        !this.searchTerm || item.user.username!.toLowerCase().includes(this.searchTerm.toLowerCase());
 
       const matchesDate =
         !this.dateRange || this.dateRange.length < 2 ||
-        (new Date(item.createdAt) >= this.dateRange[0] && new Date(item.createdAt) <= this.dateRange[1]);
+        (new Date(item.createdAt!) >= this.dateRange[0] && new Date(item.createdAt!) <= this.dateRange[1]);
 
       return matchesStatus && matchesUsername && matchesDate;
     });
