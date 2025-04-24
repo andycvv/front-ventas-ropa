@@ -4,7 +4,7 @@ import { ClientLayoutComponent } from './shared/layouts/client-layout/client-lay
 
 export const routes: Routes = [
   {
-    path: 'client',
+    path: '',
     component: ClientLayoutComponent,
     children: [
       {
