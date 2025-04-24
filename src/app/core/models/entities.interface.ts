@@ -44,9 +44,9 @@ export interface Inventory {
 
 export interface User {
   id?: number;
-  username: string;
-  email: string;
-  password: string;
+  username?: string;
+  email?: string;
+  password?: string;
 }
 
 export interface Address {
@@ -75,11 +75,11 @@ export interface OrderDetail {
 
 export interface Order {
   id?: number;
-  totalAmount: number;
-  createdAt: string;
-  status: string;
+  totalAmount?: number;
+  createdAt?: string;
+  status?: string;
   user: User;
-  address: Address;
-  payments: Payment[];
+  // address: Address;
+  // payments: Payment[];
   orderDetails: OrderDetail[];
 }
