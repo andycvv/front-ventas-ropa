@@ -85,7 +85,7 @@ export class OrderListComponent implements OnInit {
   
 
   updateOrderStatus(item: Order, status: string) {
-    this.orderService.save({ ...item, status }).subscribe(() => {
+    this.orderService.updateState({ ...item, status }).subscribe(() => {
       this.orderService.getAll().subscribe(orders => {
         this.orders = orders;
         this.filteredOrders = orders;
