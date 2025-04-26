@@ -24,4 +24,7 @@ export class OrderService {
     return this.http.get<Order>(this.apiUrl + `/${id}`)
   }
 
+  updateState(order: Order) {
+    return this.http.post<void>(this.apiUrl + '/state', order)
+  }
 }
