@@ -1,0 +1,40 @@
+<h2 class="text-3xl font-bold mb-5">Panel principal</h2>
+
+<div class="grid gap-5 grid-cols-1 md:grid-cols-2">
+  <div class="rounded-md p-5 border-2 border-gray-200">
+    <div class="flex flex-wrap justify-between items-center">
+      <h3 class="font-medium">Productos activos</h3>
+      <i class="pi pi-box"></i>
+    </div>
+    <span class="text-4xl font-bold">{{activedProducts}}</span>
+    <p class="text-gray-500">de {{totalProducts}} productos</p>
+  </div>
+
+  <div class="rounded-md p-5 border-2 border-gray-200">
+    <div class="flex flex-wrap justify-between items-center">
+      <h3 class="font-medium">Inventarios activos</h3>
+      <i class="pi pi-box"></i>
+    </div>
+    <span class="text-4xl font-bold">{{activedInventories}}</span>
+    <p class="text-gray-500">de {{totalInventories}} inventarios</p>
+  </div>
+
+  <div class="rounded-md p-5 border-2 border-gray-200">
+    <div class="flex flex-wrap justify-between items-center">
+      <h3 class="font-medium">Total pedidos</h3>
+      <i class="pi pi-box"></i>
+    </div>
+    <span class="text-4xl font-bold">{{totalOrders}}</span>
+  </div>
+
+  <div class="rounded-md p-5 border-2 border-gray-200">
+    <div class="flex flex-wrap justify-between items-center">
+      <h3 class="font-medium">Clientes</h3>
+      <i class="pi pi-box"></i>
+    </div>
+    <span class="text-4xl font-bold">{{totalCustomers}}</span>
+  </div>
+
+  <app-dashboard-pie-chart></app-dashboard-pie-chart>
+  <app-dashboard-pie-chart-basic></app-dashboard-pie-chart-basic>
+</div>
