@@ -16,9 +16,13 @@
       <div class="bg-gray-100 px-3 py-2 rounded-full"><i class="pi pi-user" style="font-size: 1.5rem;"></i></div>
       @if (showUserMenu) {
         <div class="absolute translate-y-16 bg-white shadow-lg rounded-md mt-2 w-48 z-10">
-          <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" routerLink="/login">Iniciar Sesión</a>
-          <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" routerLink="/register">Registrarse</a>
-          <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" (click)="logout()">Cerrar Sesión</a>
+          @if (isLogged) {
+            <span class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 font-bold">{{username.toUpperCase()}}</span>
+            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" (click)="logout()">Cerrar Sesión</a>
+          } @else {
+            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" routerLink="/auth/login">Iniciar Sesión</a>
+            <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" routerLink="/auth/register">Registrarse</a>
+          }
         </div>
       }
     </div>
