@@ -42,11 +42,17 @@ export interface Inventory {
   imageProducts: ImageProduct[]
 }
 
+export interface Role {
+  id?: number;
+  name?: string;
+}
+
 export interface User {
   id?: number;
   username?: string;
   email?: string;
   password?: string;
+  role?: Role
 }
 
 export interface Address {
