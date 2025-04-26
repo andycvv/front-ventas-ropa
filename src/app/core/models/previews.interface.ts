@@ -1,7 +1,30 @@
-import { Product } from "./entities.interface";
+import { Inventory } from "./entities.interface";
 
 export interface ProductPreview {
-  product: Product;
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  categoryName: string;
   images: string[];
-  colors: string[];
+  colors: string[]
+}
+
+export interface ProductDetail {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  categoryName: string;
+  inventories: Inventory[]
+}
+
+export interface DashboardDto {
+  activedProducts: number;
+  activedInventories: number;
+
+  totalProducts: number;
+  totalCustomers: number;
+  totalInventories: number;
+  totalOrders: number;
 }
