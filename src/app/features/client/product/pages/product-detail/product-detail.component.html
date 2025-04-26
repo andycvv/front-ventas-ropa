@@ -1,83 +1,92 @@
-<div class="grid md:grid-cols-2 gap-8 p-8 max-w-[1500px] mx-auto">
-  <!-- Carrusel de imágenes -->
-  <swiper-container 
-    [navigation]="true"
-    [pagination]="{ clickable: true }"
-    class="w-full"
-  >
-    <swiper-slide *ngFor="let img of images">
-      <img [src]="img" class="w-full h-full object-cover" />
-    </swiper-slide>
-  </swiper-container>
+@if (productDetail) {
 
-
-  <!-- Info del producto -->
-  <div>
-    <h2 class="text-2xl font-bold">{{ productName }}</h2>
-    <p class="text-green-600 font-semibold text-xl my-2">
-      S/. {{ productInventories[0]?.product?.price }}
-    </p>
-    <p class="text-gray-700 my-2">
-      {{ productInventories[0]?.product?.description }}
-    </p>    
-
-    <!-- Selector de color -->
-    <div class="my-4">
-      <p class="text-sm font-medium">Colores disponibles:</p>
-      <div class="flex gap-2 mt-1">
-        <button 
-          *ngFor="let color of getAvailableColors()"
-          (click)="onSelectColor(color.name!)"
-          [ngClass]="{
-            'border border-black': selectedColor === color.name,
-            '': selectedColor !== color.name
-          }"
-          class="flex gap-2 items-center p-3 text-sm rounded bg-white hover:bg-gray-100"
-        >
-          <div class="w-4 h-4 rounded-full" [ngStyle]="{ 'background-color': color.code }"></div>
-          <p>{{ color.name }}</p>
-        </button>
-      </div>
-    </div>
-
-    <!-- Selector de talla -->
-    <div *ngIf="selectedColor" class="my-4">
-      <p class="text-sm font-medium">Tallas disponibles para "{{ selectedColor }}":</p>
-      <div class="flex gap-2 mt-1">
-        <button 
-          *ngFor="let size of getAvailableSizes()"
-          (click)="onSelectSize(size)"
-          [ngClass]="{
-            'bg-black text-white': selectedSize === size,
-            'bg-white border border-gray-300': selectedSize !== size
-          }"
-          class="py-3 px-5 text-sm rounded hover:bg-gray-200"
-        >
-          {{ size }}
-        </button>
-      </div>
-    </div>
-
-    <!-- Stock -->
-    <div *ngIf="selectedSize">
-      <p class="text-sm text-gray-500">Stock disponible: {{ getAvailableStock() }}</p>
-    </div>
-
-    <!-- Botón comprar -->
-    <button
-      (click)="onAddToCart(selectedInventory)"
-      [disabled]="!selectedColor || !selectedSize || getAvailableStock() === 0"
-      class="my-6 bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 disabled:opacity-50"
+  <div class="grid md:grid-cols-2 gap-8 p-8 max-w-[1500px] mx-auto">
+    <!-- Carrusel de imágenes -->
+    <swiper-container 
+      [navigation]="true"
+      [pagination]="{ clickable: true }"
+      class="w-full"
     >
-      Agregar al carrito
-    </button>
-
-    @if (mostrarAlerta) {
-      <p-message 
-        severity="success"
+      @for (img of images; track $index) {
+        <swiper-slide>
+          <img [src]="img" class="w-full h-full object-cover" />
+        </swiper-slide>
+      }
+    </swiper-container>
+  
+  
+    <!-- Info del producto -->
+    <div>
+      <h2 class="text-2xl font-bold">{{ productDetail.name }}</h2>
+      <p class="text-green-600 font-semibold text-xl my-2">
+        S/. {{ productDetail.price }}
+      </p>
+      <p class="text-gray-700 my-2">
+        {{ productDetail.description }}
+      </p>    
+  
+      <!-- Selector de color -->
+      <div class="my-4">
+        <p class="text-sm font-medium">Colores disponibles:</p>
+        <div class="flex gap-2 mt-1">
+          @for (color of getAvailableColors(); track color.id) {
+            <button 
+              (click)="onSelectColor(color.name!)"
+              [ngClass]="{
+                'border border-black': selectedColor === color.name,
+                '': selectedColor !== color.name
+              }"
+              class="flex gap-2 items-center p-3 text-sm rounded bg-white hover:bg-gray-100"
+            >
+              <div class="w-4 h-4 rounded-full" [ngStyle]="{ 'background-color': color.code }"></div>
+              <p>{{ color.name }}</p>
+            </button>
+          }
+        </div>
+      </div>
+  
+      <!-- Selector de talla -->
+      <div *ngIf="selectedColor" class="my-4">
+        <p class="text-sm font-medium">Tallas disponibles para "{{ selectedColor }}":</p>
+        <div class="flex gap-2 mt-1">
+          @for (size of getAvailableSizes(); track $index) {
+            <button 
+              (click)="onSelectSize(size)"
+              [ngClass]="{
+                'bg-black text-white': selectedSize === size,
+                'bg-white border border-gray-300': selectedSize !== size
+              }"
+              class="py-3 px-5 text-sm rounded hover:bg-gray-200"
+            >
+              {{ size }}
+            </button>
+          }
+        </div>
+      </div>
+  
+      <!-- Stock -->
+      @if (selectedSize) {
+        <div>
+          <p class="text-sm text-gray-500">Stock disponible: {{ getAvailableStock() }}</p>
+        </div>
+      }
+  
+      <!-- Botón comprar -->
+      <button
+        (click)="onAddToCart(selectedInventory)"
+        [disabled]="!selectedColor || !selectedSize || getAvailableStock() === 0"
+        class="my-6 bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 disabled:opacity-50"
       >
-        Producto agregado al carrito correctamente
-      </p-message>
-    }
+        Agregar al carrito
+      </button>
+  
+      @if (mostrarAlerta) {
+        <p-message 
+          severity="success"
+        >
+          Producto agregado al carrito correctamente
+        </p-message>
+      }
+    </div>
   </div>
-</div>
+}

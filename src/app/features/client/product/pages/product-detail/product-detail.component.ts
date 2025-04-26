@@ -1,43 +1,43 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, model } from '@angular/core';
 import { Color, ImageProduct, Inventory } from '../../../../../core/models/entities.interface';
 import { ActivatedRoute } from '@angular/router';
-import { InventoryService } from '../../../../../core/services/inventory.service';
-import { CommonModule } from '@angular/common';
 import { GalleriaModule } from 'primeng/galleria';
 import { CartService } from '../../../../../core/services/cart.service';
 import { Message } from 'primeng/message';
+import { ProductDetail } from '../../../../../core/models/previews.interface';
+import { ProductService } from '../../../../../core/services/product.service';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule, GalleriaModule, Message],
+  imports: [GalleriaModule, Message],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ProductDetailComponent {
-  productInventories: Inventory[] = [];
-  selectedInventory!: Inventory;
-  productName = '';
-  selectedColor: string | null = null;
+  productDetail!: ProductDetail
+  selectedColor!: string;
   selectedSize: string | null = null;
+  selectedInventory!: Inventory;
+
   images: string[] = [];
 
   mostrarAlerta = false;
 
   constructor(
     private route: ActivatedRoute,
-    private inventoryService: InventoryService,
+    private productService: ProductService,
     private cartService: CartService
   ) {}
 
   ngOnInit(): void {
     const productId = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.inventoryService.getAll().subscribe(inventories => {
-      this.productInventories = inventories.filter(inv => inv.product && inv.product.id === productId && inv.enabled);
-      this.selectedInventory = inventories[0] || null;
-      this.productName = this.productInventories[0]?.product.name || '';
-      this.selectedColor = this.productInventories[0]?.color.name || null;
+    this.productService.getDetailById(productId).subscribe(detail => {
+      this.productDetail = detail;
+      this.selectedColor = detail.inventories[0].color.name!;
+      this.selectedInventory = detail.inventories[0];
+
       this.updateImages();
     });
   }
@@ -49,48 +49,46 @@ export class ProductDetailComponent {
       price: inventory.product.price
     });
 
-    this.mostrarAlerta = !this.mostrarAlerta;
+    this.mostrarAlerta = true;
+    setTimeout(() => this.mostrarAlerta = false, 3000);
   }
 
   updateImages() {
-    const colorInventory = this.productInventories.find(inv => inv.color.name === this.selectedColor);
-    this.images = colorInventory?.imageProducts.map(img => img.url || '') || []; 
+    const inv = this.productDetail.inventories.find(inv => inv.color.name === this.selectedColor)
+    this.images = inv!.imageProducts.map(img => img.url!);
   }
 
   getAvailableColors(): Color[] {
-    const uniqueColorsMap = new Map<number, Color>();
-
-    this.productInventories.forEach(inv => {
-      if (!uniqueColorsMap.has(inv.color.id!)) {
-        uniqueColorsMap.set(inv.color.id!, inv.color);
+    return this.productDetail.inventories.reduce((colors: Color[], inv) => {
+      if (!colors.some(c => c.id === inv.color.id)) {
+        colors.push(inv.color);
       }
-    });
-  
-    return Array.from(uniqueColorsMap.values());
+      return colors;
+    }, []);
   }
 
   getAvailableSizes(): string[] {
-    return this.productInventories
+    return this.productDetail.inventories
       .filter(inv => inv.color.name === this.selectedColor)
-      .map(inv => inv.size.value || '');
+      .map(inv => inv.size.value!)
   }
 
   onSelectColor(color: string) {
     this.selectedColor = color;
     this.selectedSize = null;
-    this.selectedInventory = this.productInventories.find(inv => inv.color.name === color)!;
+    this.selectedInventory = this.productDetail.inventories.find(inv => inv.color.name === color)!
     this.updateImages();
   }
 
   onSelectSize(size: string) {
     this.selectedSize = size;
-    this.selectedInventory = this.productInventories.find(
+    this.selectedInventory = this.productDetail.inventories.find(
       inv => inv.color.name === this.selectedColor && inv.size.value === size
     )!;
   }
 
   getAvailableStock(): number {
-    const inv = this.productInventories.find(
+    const inv = this.productDetail.inventories.find(
       inv => inv.color.name === this.selectedColor && inv.size.value === this.selectedSize
     );
     return inv?.stock || 0;
