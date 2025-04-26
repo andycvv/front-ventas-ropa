@@ -30,16 +30,16 @@
       <div class="flex items-center gap-3 px-3 py-2 mb-2 bg-gray-100 rounded-sm">
         <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-sm font-semibold text-white">
           <!-- Inicial del nombre como avatar (opcional) -->
-          {{ user.name.charAt(0).toUpperCase() }}
+          {{ username.charAt(0).toUpperCase() }}
         </div>
         <div *ngIf="!collapsed" class="text-sm">
-          <div class="font-semibold text-black">{{ user.name }}</div>
-          <div class="text-gray-500 text-xs">{{ user.role }}</div>
+          <div class="font-semibold text-black">{{ username }}</div>
+          <div class="text-gray-500 text-xs">{{ role }}</div>
         </div>
       </div>
     
       <!-- Logout Button -->
-      <div class="flex items-center px-3 py-2 rounded-sm cursor-pointer transition-all duration-200 hover:bg-red-100 text-red-600 hover:text-red-700">
+      <div (click)="logout()" class="flex items-center px-3 py-2 rounded-sm cursor-pointer transition-all duration-200 hover:bg-red-100 text-red-600 hover:text-red-700">
         <i class="pi pi-sign-out mr-2"></i>
         <span *ngIf="!collapsed" class="transition-opacity font-medium">Cerrar sesión</span>
       </div>

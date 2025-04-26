@@ -1,8 +1,9 @@
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Component, HostListener } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -20,16 +21,21 @@ export class AdminLayoutComponent {
     { icon: 'pi pi-palette', name: 'Colores', path: 'colores' },
     { icon: 'pi pi-file', name: 'Tallas', path: 'tallas' },
     { icon: 'pi pi-map', name: 'Inventarios', path: 'inventarios' },
-    { icon: 'pi pi-gift', name: 'Pedidos', path: 'pedidos' },
+    { icon: 'pi pi-gift', name: 'Ventas', path: 'ventas' },
     { icon: 'pi pi-users', name: 'Usuarios', path: 'usuarios' },
   ];
 
-  user = {
-    name: 'Andy Vargas',
-    role: 'Admin',
-  }
+  username: string = ''
+  role: string = ''
+
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
+    this.username = this.authService.getUsername()!
+    this.role = this.authService.getUserRole()!;
     this.onResize();
   }
 
@@ -39,6 +45,7 @@ export class AdminLayoutComponent {
   }
 
   logout() {
-    console.log('Logout clicked');
+    this.authService.logout();
+    this.router.navigate(['/auth/login'])
   }
 }
