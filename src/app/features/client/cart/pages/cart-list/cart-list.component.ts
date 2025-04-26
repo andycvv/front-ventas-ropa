@@ -4,6 +4,7 @@ import { OrderService } from '../../../../../core/services/order.service';
 import { Inventory, OrderDetail } from '../../../../../core/models/entities.interface';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-cart-list',
@@ -18,6 +19,7 @@ export class CartListComponent {
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -35,22 +37,9 @@ export class CartListComponent {
   }
 
   createOrder() {
-    // console.log({
-    //   user: {
-    //     id: 1
-    //   },
-    //   totalAmount: this.totalPrice,
-    //   status: "PAGADO",
-    //   orderDetails: [...this.cartItems].map(detail => ({
-    //     ...detail,
-    //     inventory: {
-    //       id: detail.inventory.id
-    //     }
-    //   }))
-    // })
     this.orderService.save({
       user: {
-        id: 1
+        id: this.authService.getUserId()
       },
       totalAmount: this.totalPrice,
       status: "PAGADO",
