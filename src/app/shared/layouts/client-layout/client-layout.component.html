@@ -1,16 +1,15 @@
-<div class="flex justify-around items-center p-3 border-b-2 border-gray-200 bg-white shadow-md">
+<div class="flex justify-around items-center px-2 py-4 border-b-2 border-gray-200 bg-white shadow-md">
   <a class="text-2xl font-bold text-gray-800 cursor-pointer" routerLink="/">
     Sistema
   </a>
-  <div class="flex font-semibold">
-    <a class="py-2 px-5 hover:bg-gray-100 rounded-md cursor-pointer transition-all" routerLink="/hombre">Hombre</a>
-    <a class="py-2 px-5 hover:bg-gray-100 rounded-md cursor-pointer transition-all" routerLink="/mujer">Mujer</a>
-    <a class="py-2 px-5 hover:bg-gray-100 rounded-md cursor-pointer transition-all" routerLink="/niño">Niño</a>
-    <a class="py-2 px-5 hover:bg-gray-100 rounded-md cursor-pointer transition-all" routerLink="/niña">Niña</a>
-  </div>
-  <div class="flex items-center gap-3">
-    <a routerLink="/cart" class="cursor-pointer">
-      <i class="pi pi-shopping-cart" style="font-size: 1.5rem;"></i>
+  <div class="flex items-center gap-7">
+    <a routerLink="/cart" class="cursor-pointer relative group">
+      <i class="pi pi-shopping-cart text-gray-800 transition-all duration-300 group-hover:text-blue-600 group-hover:scale-125" style="font-size: 1.5rem;"></i>
+      @if (cartItemCount > 0) {
+        <span class="absolute bottom-5 left-5 bg-blue-400 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+          {{ cartItemCount }}
+        </span>
+      }
     </a>
     <div class="flex items-center cursor-pointer relative" (click)="toggleUserMenu()">
       <div class="bg-gray-100 px-3 py-2 rounded-full"><i class="pi pi-user" style="font-size: 1.5rem;"></i></div>
