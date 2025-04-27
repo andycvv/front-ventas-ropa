@@ -4,6 +4,7 @@ export interface ProductPreview {
   id: number;
   name: string;
   description: string;
+  gender: string;
   price: number;
   categoryName: string;
   images: string[];

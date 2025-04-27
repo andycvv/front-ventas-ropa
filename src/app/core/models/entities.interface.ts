@@ -3,6 +3,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  gender: string;
   createdAt?: string;
   enabled?: boolean;
   category: Category
