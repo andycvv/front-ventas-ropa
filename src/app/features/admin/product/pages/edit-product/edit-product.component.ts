@@ -41,6 +41,7 @@ export class EditProductComponent {
         name: product.name,
         price: product.price,
         description: product.description,
+        gender: product.gender,
         enabled: product.enabled,
         category: product.category
       }

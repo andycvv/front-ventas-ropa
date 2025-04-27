@@ -38,6 +38,8 @@ export class ProductFormComponent {
   name: string = '';
   price: string = '0.00';
   description: string = '';
+
+  gender: string = '';
   selectedCategory?: Category;
   selectedStatus: { label: string; value: boolean } | null = null;
 
@@ -50,6 +52,7 @@ export class ProductFormComponent {
     this.name = this.product.name || '';
     this.price = this.product.price?.toString() || '0.00';
     this.description = this.product.description || '';
+    this.gender = this.product.gender!;
     this.selectedCategory = this.product.category;
     this.selectedStatus = this.product.enabled != null
       ? (this.product.enabled ? this.states[0] : this.states[1])
@@ -64,6 +67,7 @@ export class ProductFormComponent {
       name: this.name,
       price: parseFloat(this.price),
       description: this.description,
+      gender: this.gender,
       category: this.selectedCategory,
       enabled: this.selectedStatus?.value ?? true,
     };

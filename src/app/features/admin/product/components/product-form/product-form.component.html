@@ -16,6 +16,17 @@
     <p-inputgroup-addon>
       <i class="pi pi-cog"></i>
     </p-inputgroup-addon>
+    <p-select 
+      [(ngModel)]="gender" 
+      [options]="['Hombre', 'Mujer', 'Niño', 'Niña']"
+      placeholder="Género" 
+    />
+  </p-inputgroup>
+
+  <p-inputgroup>
+    <p-inputgroup-addon>
+      <i class="pi pi-cog"></i>
+    </p-inputgroup-addon>
     <p-select [(ngModel)]="selectedCategory" [options]="categories" optionLabel="name" placeholder="Categoría" />
   </p-inputgroup>
 

@@ -1,4 +1,14 @@
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-6 max-w-[1500px] mx-auto">
+<div class="py-6 flex flex-wrap justify-center gap-4 max-w-[1500px] mx-auto">
+  @for (gender of genders; track gender) {
+    <p-button 
+      [label]="gender.label" 
+      [severity]="selectedGender === gender.label ? 'info' : 'contrast'"
+      (click)="loadProducts(gender.value)"
+    />
+  }
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-[1500px] mx-auto">
   @for (product of productPreviews; track product.id ) {
     <a [routerLink]="'/producto/' + product.id" class="border-[1px] border-transparent hover:border-black cursor-pointer group transition-all duration-300">
       <div class="relative w-full aspect-square overflow-hidden">
