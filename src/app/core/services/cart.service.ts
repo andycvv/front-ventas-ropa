@@ -43,4 +43,9 @@ export class CartService {
     this.cartItems = this.cartItems.filter(cartItem => cartItem.inventory.id !== inventoryId);
     this._items.next(this.cartItems);
   }
+
+  clearCart() {
+    this.cartItems = [];
+    this._items.next(this.cartItems);
+  }
 }
