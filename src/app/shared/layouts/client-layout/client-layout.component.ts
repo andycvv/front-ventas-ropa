@@ -36,6 +36,7 @@ export class ClientLayoutComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.cartService.clearCart();
     this.router.navigate(['/auth/login'])
   }
 }
