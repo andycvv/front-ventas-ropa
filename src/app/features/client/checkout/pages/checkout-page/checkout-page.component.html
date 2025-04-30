@@ -1,0 +1,144 @@
+<div class="max-w-[1400px] mx-auto p-5">
+  <h2 class="font-bold text-3xl text-center">PAGAR</h2>
+  <p class="font-medium text-gray-500 mb-5 text-center">({{cartItems.length}} producto(s)) S/.{{totalAmount}}</p>
+
+  <div class="flex gap-10 flex-col lg:flex-row">
+    <div class="w-full">
+      <p-accordion value="0">
+        <p-accordion-panel value="0">
+          <p-accordion-header>DIRECCIÓN DE ENTREGA</p-accordion-header>
+          <p-accordion-content>
+            <div class="flex flex-col gap-4">
+              <div class="flex gap-4 flex-col md:flex-row">
+                <div class="flex flex-col gap-2 w-full">
+                  <label for="pais">País</label>
+                  <input pInputText id="pais" [(ngModel)]="address.country" name="country" [readOnly]="true" />
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="ciudad">Ciudad</label>
+                <input pInputText id="ciudad" [(ngModel)]="address.city" name="city" required minlength="2"
+                  #city="ngModel" />
+                @if (city.invalid && city.touched) {
+                <small class="text-red-500">
+                  La ciudad es obligatoria y debe tener al menos 2 caracteres.
+                </small>
+                }
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="calle">Calle</label>
+                <input pInputText id="calle" [(ngModel)]="address.street" name="street" required minlength="3"
+                  #street="ngModel" />
+                @if (street.invalid && street.touched) {
+                <small class="text-red-500">
+                  La calle es obligatoria y debe tener al menos 3 caracteres.
+                </small>
+                }
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="zip">Código postal</label>
+                <input pInputText id="zip" [(ngModel)]="address.zipCode" name="zipCode" required pattern="[0-9]{5}"
+                  #zipCode="ngModel" />
+                @if (zipCode.invalid && zipCode.touched) {
+                <small class="text-red-500">
+                  El código postal debe tener exactamente 5 dígitos.
+                </small>
+                }
+              </div>
+            </div>
+          </p-accordion-content>
+        </p-accordion-panel>
+
+        <p-accordion-panel value="1">
+          <p-accordion-header>PAGO</p-accordion-header>
+          <p-accordion-content>
+            <div class="flex flex-col gap-4">
+              <div class="flex flex-col gap-2">
+                <label for="cardNumber">Número de tarjeta</label>
+                <input pInputText id="cardNumber" [(ngModel)]="payment.cardNumber" name="cardNumber" maxlength="16" pattern="[0-9]{16}" #cardNumber="ngModel" placeholder="XXXX-XXXX-XXXX-XXXX" />
+                @if (cardNumber.invalid && cardNumber.touched) {
+                  <small class="text-red-500">
+                    El número de tarjeta debe tener 16 dígitos.
+                  </small>
+                }
+              </div>
+
+              <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex flex-col gap-2 w-full">
+                  <label for="expiry">Fecha de expiración</label>
+                  <input pInputText id="expiry" [(ngModel)]="payment.expiryDate" name="expiryDate" placeholder="MM/AA" required pattern="^(0[1-9]|1[0-2])\/\d{2}$" #expiryDate="ngModel" maxlength="5" />
+                  @if (expiryDate.invalid && expiryDate.touched) {
+                    <small class="text-red-500">
+                      El formato debe ser MM/AA.
+                    </small>
+                  }
+                </div>
+
+                <div class="flex flex-col gap-2 w-full">
+                  <label for="cvv">CVV</label>
+                  <input pInputText id="cvv" [(ngModel)]="payment.cvv" name="cvv" required pattern="[0-9]{3}" #cvv="ngModel" maxlength="3" />
+                  @if (cvv.invalid && cvv.touched) {
+                    <small class="text-red-500">
+                      El CVV debe tener 3 dígitos.
+                    </small>
+                  }
+                </div>
+              </div>
+
+              <div class="flex flex-col gap-2">
+                <label for="paymentMethod">Método de pago</label>
+                <select id="paymentMethod" [(ngModel)]="payment.paymentMethod" name="paymentMethod" class="p-2 border border-gray-300 rounded-md">
+                  <option value="TARJETA">Tarjeta</option>
+                  <option value="PAYPAL">Paypal</option>
+                </select>
+              </div>
+
+              <button 
+                type="button" 
+                (click)="payOrder()" 
+                [disabled]="isSubmitDisabled()" 
+                class="bg-black text-white py-3 font-bold cursor-pointer hover:text-gray-300 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed" 
+              >
+                Pagar
+              </button>
+            </div>
+          </p-accordion-content>
+        </p-accordion-panel>
+      </p-accordion>
+    </div>
+    <div class="lg:w-7/12">
+      <div class="flex justify-between">
+        <h3 class="font-bold">RESUMEN DE LA ORDEN</h3>
+        <a class="font-medium underline" [routerLink]="['/cart']">EDITAR</a>
+      </div>
+      <div class="flex justify-between my-4">
+        <span>{{cartItems.length}} producto(s)</span>
+        <span>S/. {{totalAmount}}</span>
+      </div>
+      <div class="flex-col py-5 border-t-2">
+        @for (item of cartItems; track $index) {
+          <div class="flex gap-4 my-2">
+            <div class="w-[150px] h-[150px] overflow-hidden">
+              <img 
+                class="w-full h-full object-cover" 
+                [src]="item.inventory.imageProducts[0].url" 
+                alt="Producto" 
+              />
+            </div>
+            <div>
+              <p class="font-semibold">
+                {{ item.inventory.product.name.length > 20 ? (item.inventory.product.name | slice:0:20) + '...' : item.inventory.product.name }}
+              </p>
+              <p class="mb-3">S/. {{item.price}}</p>
+              <p class="text-gray-500">Talla: {{item.inventory.size.value}} / Cantidad: {{item.quantity}}</p>
+              <p class="text-gray-500">Color: {{item.inventory.color.name}}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
