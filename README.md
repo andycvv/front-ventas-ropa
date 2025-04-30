@@ -1,59 +1,54 @@
-# FrontVentasRopa
+# 🛍️ Sistema de Ventas - Frontend (Angular)
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+Este es el frontend de un sistema de ventas para una tienda de ropa en línea. Desarrollado como proyecto final del curso **Desarrollo de Aplicaciones Web 1** del Instituto **Cibertec**.
 
-## Development server
+## 🚀 Tecnologías utilizadas
 
-To start a local development server, run:
+- [Angular](https://angular.io/)
+- [PrimeNG](https://www.primefaces.org/primeng/) – Componentes UI reutilizables
+- [SweetAlert2](https://sweetalert2.github.io/) – Alertas interactivas
+- [Chart.js](https://www.chartjs.org/) – Gráficos estadísticos
+- CSS personalizado
 
-```bash
-ng serve
-```
+## 🔐 Características principales
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- **Autenticación con Spring Security (Basic Auth)**
+- Inicio de sesión y registro
+- Diferenciación de roles: Cliente y Administrador
+- Filtro dinámico de productos (por género)
+- Carrito de compras con resumen y edición de cantidades
+- Simulación de pasarela de pagos
+- Panel administrador con métricas y gráficos
+- CRUDs para productos, tallas, colores, categorías e inventarios
+- Manejo de rutas protegidas (Guards)
+- Uso de **servicios, layouts, interceptors y modelos** en Angular
 
-## Code scaffolding
+## 📦 Instalación
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tuusuario/tu-repo.git
+   cd tu-repo
+   ```
 
-```bash
-ng generate component component-name
-```
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+3. Inicia la aplicación:
+   ```bash
+   ng serve
+   ```
 
-```bash
-ng generate --help
-```
+4. Abre en el navegador:  
+   [http://localhost:4200](http://localhost:4200)
 
-## Building
+## 📌 Notas
 
-To build the project run:
+- Este proyecto **consume una API backend desarrollada en Spring Boot**, la cual no está incluida en este repositorio.
+- La autenticación se realiza mediante **Basic Auth**, por lo que se recomienda correr el frontend y backend en local para probar correctamente.
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Desarrollado con 💻 por **Andy Vargas Vargas**
