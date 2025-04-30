@@ -5,7 +5,7 @@ Este es el frontend de un sistema de ventas para una tienda de ropa en línea. D
 ## 🚀 Tecnologías utilizadas
 
 - [Angular](https://angular.io/)
-- [PrimeNG](https://www.primefaces.org/primeng/) – Componentes UI reutilizables
+- [PrimeNG](https://primeng.org/) – Componentes UI reutilizables
 - [SweetAlert2](https://sweetalert2.github.io/) – Alertas interactivas
 - [Chart.js](https://www.chartjs.org/) – Gráficos estadísticos
 - CSS personalizado
