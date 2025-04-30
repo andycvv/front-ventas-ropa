@@ -5,10 +5,11 @@ import { Inventory, OrderDetail } from '../../../../../core/models/entities.inte
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../../../core/services/auth.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart-list',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './cart-list.component.html',
   styleUrl: './cart-list.component.css'
 })
@@ -30,24 +31,26 @@ export class CartListComponent {
     });
   }
 
+  increaseQuantity(item: OrderDetail) {
+    item.quantity++;
+    this.calculateTotalPrice();
+  }
+  
+  decreaseQuantity(item: OrderDetail) {
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.calculateTotalPrice();
+    }
+  }
+
   calculateTotalPrice() {
     this.totalPrice = this.cartItems.reduce((total, item) => {
       return total + (item.inventory.product.price * item.quantity);
     }, 0);
   }
 
-  createOrder() {
-    this.orderService.save({
-      user: {
-        id: this.authService.getUserId()
-      },
-      totalAmount: this.totalPrice,
-      status: "PAGADO",
-      orderDetails: [...this.cartItems].map(detail => ({
-        ...detail,
-        inventory: { id: detail.inventory.id } as unknown as Inventory
-      }))
-    }).subscribe(() => this.router.navigate(["/"]))
+  payOrder() {
+    this.router.navigate(["/checkout"])
   }
 
   removeItem(id: number) {
