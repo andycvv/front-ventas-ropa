@@ -1,21 +1,23 @@
 <div class="flex justify-between mb-4">
   <div class="flex gap-2">
-    <p-dropdown
-      *ngIf="showStatusFilter"
-      [options]="statusOptions"
-      [(ngModel)]="selectedStatus"
-      placeholder="Seleccionar Estado"
-      (onChange)="applyFilters()"
-      class="w-48"
-    ></p-dropdown>
+    @if (showStatusFilter) {
+      <p-dropdown
+        [options]="statusOptions"
+        [(ngModel)]="selectedStatus"
+        placeholder="Seleccionar Estado"
+        (onChange)="applyFilters()"
+        class="w-48"
+      ></p-dropdown>
+    }
 
-    <input
-      *ngIf="showNameFilter"
-      pInputText
-      [(ngModel)]="searchTerm"
-      placeholder="Nombre"
-      (input)="applyFilters()"
-    />
+    @if (showNameFilter) {
+      <input
+        pInputText
+        [(ngModel)]="searchTerm"
+        placeholder="Nombre"
+        (input)="applyFilters()"
+      />
+    }
   </div>
 
   <p-button

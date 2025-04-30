@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
@@ -12,7 +11,6 @@ import { ColorPicker } from 'primeng/colorpicker';
 @Component({
   selector: 'app-table',
   imports: [
-    CommonModule,
     TableModule,
     DropdownModule,
     InputTextModule,
@@ -69,6 +67,6 @@ export class TableComponent {
   ];
 
   getNestedValue(obj: any, path: string): any {
-    return path.split('.').reduce((acc, part) => acc && acc[part], obj);
+    return path.split('.').reduce((obj, key) => obj && obj[key], obj);
   }
 }
