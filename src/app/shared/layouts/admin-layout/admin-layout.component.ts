@@ -21,8 +21,7 @@ export class AdminLayoutComponent {
     { icon: 'pi pi-palette', name: 'Colores', path: 'colores' },
     { icon: 'pi pi-file', name: 'Tallas', path: 'tallas' },
     { icon: 'pi pi-map', name: 'Inventarios', path: 'inventarios' },
-    { icon: 'pi pi-gift', name: 'Ventas', path: 'ventas' },
-    { icon: 'pi pi-users', name: 'Usuarios', path: 'usuarios' },
+    { icon: 'pi pi-gift', name: 'Ventas', path: 'ventas' }
   ];
 
   username: string = ''
