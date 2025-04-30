@@ -10,6 +10,9 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { BadgeModule } from 'primeng/badge';
 import { InputText } from 'primeng/inputtext';
 import { DatePicker } from 'primeng/datepicker';
+import { Dialog } from 'primeng/dialog';
+import { TabsModule } from 'primeng/tabs';
+
 
 @Component({
   selector: 'app-order-list',
@@ -23,7 +26,9 @@ import { DatePicker } from 'primeng/datepicker';
     BadgeModule,
     Tag,
     InputText,
-    DatePicker
+    DatePicker,
+    Dialog,
+    TabsModule
   ],
   templateUrl: './order-list.component.html',
   styleUrl: './order-list.component.css'
@@ -35,10 +40,14 @@ export class OrderListComponent implements OnInit {
   selectedStatus: { label: string; status: string } | null = null;
   searchTerm: string = '';
   dateRange: Date[] = [];
+  
+  // Modal
+  public visibleDialog = false;
+  public orderToShow!: Order;
+  public tabNumber = 0;
 
   states = [
     { label: 'Todos', value: null },
-    { label: 'Pendiente', status: "PENDIENTE" },
     { label: 'Pagado', status: "PAGADO" },
     { label: 'Enviado', status: "ENVIADO" },
     { label: 'Entregado', status: "ENTREGADO" }
@@ -91,5 +100,10 @@ export class OrderListComponent implements OnInit {
         this.filteredOrders = orders;
       });
     });
+  }
+
+  showDialog(item: Order) {
+    this.visibleDialog = true;
+    this.orderToShow = item;
   }
 }
