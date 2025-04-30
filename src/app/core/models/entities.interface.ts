@@ -62,15 +62,18 @@ export interface Address {
   city: string;
   country: string;
   zipCode: string;
-  user: User;
 }
 
 export interface Payment {
   id?: number;
   transactionId: string;
-  createdAt: string;
+  createdAt?: string;
   paymentMethod: string;
   paymentStatus: string;
+
+  cardNumber?: string;  //
+  expiryDate?: string;  //
+  cvv?: string;         //
 }
 
 export interface OrderDetail {
@@ -86,7 +89,7 @@ export interface Order {
   createdAt?: string;
   status?: string;
   user: User;
-  // address: Address;
-  // payments: Payment[];
+  address: Address;
+  payments: Payment[];
   orderDetails: OrderDetail[];
 }
