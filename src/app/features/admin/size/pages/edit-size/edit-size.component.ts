@@ -3,6 +3,7 @@ import { SizeService } from '../../../../../core/services/size.service';
 import { Size } from '../../../../../core/models/entities.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SizeFormComponent } from "../../components/size-form/size-form.component";
+import { mostrarAlertaSuccess } from '../../../../../shared/functions/alerts';
 
 @Component({
   selector: 'app-edit-size',
@@ -36,8 +37,11 @@ export class EditSizeComponent implements OnInit {
     });
   }
 
-  createSize(size: Size) {
-    this.sizeService.save(size).subscribe(() => this.router.navigate(['/admin/tallas']));
+  editSize(size: Size) {
+    this.sizeService.save(size).subscribe(() => {
+      this.router.navigate(['/admin/tallas']);
+      mostrarAlertaSuccess("Se actualizó la talla correctamente");
+    });
   }
 
   cancel() {

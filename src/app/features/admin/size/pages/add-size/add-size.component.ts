@@ -3,6 +3,7 @@ import { SizeFormComponent } from "../../components/size-form/size-form.componen
 import { Size } from '../../../../../core/models/entities.interface';
 import { SizeService } from '../../../../../core/services/size.service';
 import { Router } from '@angular/router';
+import { mostrarAlertaSuccess } from '../../../../../shared/functions/alerts';
 
 @Component({
   selector: 'app-add-size',
@@ -14,10 +15,13 @@ export class AddSizeComponent {
   constructor(
     private sizeService: SizeService,
     private router: Router
-  ) {}
+  ) { }
 
   createSize(size: Size) {
-    this.sizeService.save(size).subscribe(() => this.router.navigate(['/admin/tallas']))
+    this.sizeService.save(size).subscribe(() => {
+      this.router.navigate(['/admin/tallas']);
+      mostrarAlertaSuccess("Se creó la talla correctamente");
+    });
   }
 
   cancel() {

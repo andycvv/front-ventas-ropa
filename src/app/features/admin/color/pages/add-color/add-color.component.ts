@@ -3,6 +3,7 @@ import { ColorFormComponent } from "../../components/color-form/color-form.compo
 import { ColorService } from '../../../../../core/services/color.service';
 import { Color } from '../../../../../core/models/entities.interface';
 import { Router } from '@angular/router';
+import { mostrarAlertaSuccess } from '../../../../../shared/functions/alerts';
 
 @Component({
   selector: 'app-add-color',
@@ -14,10 +15,13 @@ export class AddColorComponent {
   constructor(
     private colorService: ColorService,
     private router: Router
-  ) {}
+  ) { }
 
   createColor(color: Color) {
-    this.colorService.save(color).subscribe(() => this.router.navigate(['/admin/colores']));
+    this.colorService.save(color).subscribe(() => {
+      this.router.navigate(['/admin/colores']);
+      mostrarAlertaSuccess("Se creó el color correctamente");
+    });
   }
 
   cancel() {

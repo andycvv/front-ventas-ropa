@@ -3,6 +3,7 @@ import { CategoryFormComponent } from "../../components/category-form/category-f
 import { CategoryService } from '../../../../../core/services/category.service';
 import { Router } from '@angular/router';
 import { Category } from '../../../../../core/models/entities.interface';
+import { mostrarAlertaSuccess } from '../../../../../shared/functions/alerts';
 
 @Component({
   selector: 'app-add-category',
@@ -14,10 +15,13 @@ export class AddCategoryComponent {
   constructor(
     private categoryService: CategoryService,
     private router: Router
-  ) {}
+  ) { }
 
   createCategory(category: Category) {
-    this.categoryService.save(category).subscribe(() => this.router.navigate(['/admin/categorias']));
+    this.categoryService.save(category).subscribe(() => {
+      this.router.navigate(['/admin/categorias']);
+      mostrarAlertaSuccess("Se creó la categoría correctamente");
+    });
   }
 
   cancel() {

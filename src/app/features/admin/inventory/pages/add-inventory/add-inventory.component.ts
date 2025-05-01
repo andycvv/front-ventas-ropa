@@ -6,6 +6,7 @@ import { SizeService } from '../../../../../core/services/size.service';
 import { ColorService } from '../../../../../core/services/color.service';
 import { Color, Inventory, Product, Size } from '../../../../../core/models/entities.interface';
 import { Router } from '@angular/router';
+import { mostrarAlertaSuccess } from '../../../../../shared/functions/alerts';
 
 @Component({
   selector: 'app-add-inventory',
@@ -33,7 +34,10 @@ export class AddInventoryComponent {
   }
 
   addInventory(inventory: Inventory) {
-    this.inventoryService.save(inventory).subscribe(() => this.router.navigate(['/admin/inventarios']));
+    this.inventoryService.save(inventory).subscribe(() => {
+      this.router.navigate(['/admin/inventarios']);
+      mostrarAlertaSuccess("Se creó el inventario correctamente");
+    });
   }
 
   cancel() {

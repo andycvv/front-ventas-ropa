@@ -4,6 +4,7 @@ import { ProductService } from '../../../../../core/services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category, Product } from '../../../../../core/models/entities.interface';
 import { ProductFormComponent } from "../../components/product-form/product-form.component";
+import { mostrarAlertaSuccess } from '../../../../../shared/functions/alerts';
 
 @Component({
   selector: 'app-edit-product',
@@ -17,7 +18,7 @@ export class EditProductComponent {
   public product!: Product
 
   id: number = 0;
-  
+
   categories: Category[] = [];
 
   constructor(
@@ -25,7 +26,7 @@ export class EditProductComponent {
     private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -53,7 +54,10 @@ export class EditProductComponent {
   }
 
   editarProducto(product: Product) {
-    this.productService.save(product).subscribe(() => this.router.navigate(['/admin/productos']))
+    this.productService.save(product).subscribe(() => {
+      this.router.navigate(['/admin/productos']);
+      mostrarAlertaSuccess("Se actualizó el producto correctamente");
+    })
   }
 
   cancel() {

@@ -6,6 +6,7 @@ import { ProductService } from '../../../../../core/services/product.service';
 import { SizeService } from '../../../../../core/services/size.service';
 import { ColorService } from '../../../../../core/services/color.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { mostrarAlertaSuccess } from '../../../../../shared/functions/alerts';
 
 @Component({
   selector: 'app-edit-inventory',
@@ -26,7 +27,7 @@ export class EditInventoryComponent {
     private colorService: ColorService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.productService.getAll().subscribe(products => this.products = products.filter(p => p.enabled));
@@ -54,7 +55,10 @@ export class EditInventoryComponent {
 
   editInventory(inventory: Inventory) {
     console.log(inventory);
-    this.inventoryService.save(inventory).subscribe(() => this.router.navigate(['/admin/inventarios']));
+    this.inventoryService.save(inventory).subscribe(() => {
+      this.router.navigate(['/admin/inventarios']);
+      mostrarAlertaSuccess("Se actualizó el inventario correctamente");
+    });
   }
 
   cancel() {

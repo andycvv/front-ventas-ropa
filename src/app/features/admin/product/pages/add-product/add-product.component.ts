@@ -12,6 +12,7 @@ import { CategoryService } from '../../../../../core/services/category.service';
 import { ProductService } from '../../../../../core/services/product.service';
 import { Router } from '@angular/router';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
+import { mostrarAlertaSuccess } from '../../../../../shared/functions/alerts';
 
 @Component({
   selector: 'app-add-product',
@@ -48,6 +49,7 @@ export class AddProductComponent implements OnInit {
   createProduct(product: Product) {
     this.productService.save(product).subscribe(() => {
       this.router.navigate(['/admin/productos']);
+      mostrarAlertaSuccess("Se creó el producto correctamente");
     });
   }
 

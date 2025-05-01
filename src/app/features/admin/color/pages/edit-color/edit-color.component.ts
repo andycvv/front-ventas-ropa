@@ -3,6 +3,7 @@ import { ColorFormComponent } from "../../components/color-form/color-form.compo
 import { Color } from '../../../../../core/models/entities.interface';
 import { ColorService } from '../../../../../core/services/color.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { mostrarAlertaSuccess } from '../../../../../shared/functions/alerts';
 
 @Component({
   selector: 'app-edit-color',
@@ -41,7 +42,10 @@ export class EditColorComponent implements OnInit {
   }
 
   editColor(color: Color) {
-    this.colorService.save(color).subscribe(() => this.router.navigate(['/admin/colores']));
+    this.colorService.save(color).subscribe(() => {
+      this.router.navigate(['/admin/colores']);
+      mostrarAlertaSuccess("Se actualizó el color correctamente");
+    });
   }
   
 }
