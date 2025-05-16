@@ -6,7 +6,7 @@ Este es el frontend de un sistema de ventas para una tienda de ropa en línea. D
 👉 [Ver publicación en LinkedIn](https://www.linkedin.com/posts/andyvargasvargas_angular-springboot-fullstackdeveloper-activity-7323354037922295810-Hc5m?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEL7XlwBWGu7hfK1SF9u8lICYu4orP78QH8) <!-- Reemplaza con el link exacto de la publicación -->
 
 🎥 Puedes ver el video directamente aquí:  
-![Demo](https://s7.ezgif.com/tmp/ezgif-739093b16b0d61.gif) 
+![Demo](demo.gif) 
 <!-- Ver opciones más abajo para insertar video o GIF -->
 
 ---
