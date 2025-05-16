@@ -2,6 +2,15 @@
 
 Este es el frontend de un sistema de ventas para una tienda de ropa en línea. Desarrollado como proyecto final del curso **Desarrollo de Aplicaciones Web 1** del Instituto **Cibertec**.
 
+🔗 Mira el <strong>VIDEO COMPLETO</strong> demo del proyecto:  
+👉 [Ver publicación en LinkedIn](https://www.linkedin.com/posts/andyvargasvargas_angular-springboot-fullstackdeveloper-activity-7323354037922295810-Hc5m?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEL7XlwBWGu7hfK1SF9u8lICYu4orP78QH8) <!-- Reemplaza con el link exacto de la publicación -->
+
+🎥 Puedes ver el video directamente aquí:  
+![Demo](https://s7.ezgif.com/tmp/ezgif-739093b16b0d61.gif) 
+<!-- Ver opciones más abajo para insertar video o GIF -->
+
+---
+
 ## 🚀 Tecnologías utilizadas
 
 - [Angular](https://angular.io/)
@@ -9,6 +18,8 @@ Este es el frontend de un sistema de ventas para una tienda de ropa en línea. D
 - [SweetAlert2](https://sweetalert2.github.io/) – Alertas interactivas
 - [Chart.js](https://www.chartjs.org/) – Gráficos estadísticos
 - CSS personalizado
+- 
+---
 
 ## 🔐 Características principales
 
@@ -23,12 +34,29 @@ Este es el frontend de un sistema de ventas para una tienda de ropa en línea. D
 - Manejo de rutas protegidas (Guards)
 - Uso de **servicios, layouts, interceptors y modelos** en Angular
 
+---
+
+## 🔗 Backend del proyecto
+
+El backend de este sistema está desarrollado en Spring Boot y también está disponible en GitHub.
+
+📁 Repositorio del backend:  
+👉 https://github.com/andycvv/api-ventas-ropa
+
+Incluye:
+
+- API REST con endpoints para autenticación, productos, usuarios, roles, etc.
+- Seguridad con Spring Security (Basic Auth)
+- Integración con MySQL
+
+---
+
 ## 📦 Instalación
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tuusuario/tu-repo.git
-   cd tu-repo
+   git clone https://github.com/andycvv/front-ventas-ropa
+   cd front-ventas-ropa
    ```
 
 2. Instala las dependencias:
